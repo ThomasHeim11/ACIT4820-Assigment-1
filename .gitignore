@@ -14,6 +14,10 @@ __pycache__/
 # Graphviz source for the TF tree; keep the .pdf, not this.
 frames_*.gv
 
+# --- Claude Code ---
+CLAUDE.md
+.claude/
+
 # --- Editor / OS ---
 .vscode/
 *.swp
