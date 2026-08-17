@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!--
+  my_robot.urdf - ACIT4820 Assignment 1
+  Differential-drive robot: two driven wheels + a front caster.
+
+  Dimensions (metres)
+    chassis  0.6 x 0.4 x 0.1
+    wheels   radius 0.1, width 0.1   (axle at chassis mid-height)
+    caster   radius 0.05             (half-embedded in the chassis underside)
+
+  Ground contact - all three points touch z = 0:
+    base_link sits at 0.1 = wheel radius
+    wheel centres  z =  0    rel. base_link -> 0.10 m up = wheel radius
+    caster centre  z = -0.05 rel. base_link -> 0.05 m up = caster radius
+
+  Convention: REP-103, x forward, y left, z up. Angles in radians.
+-->
+<robot name="my_robot">
+
+<!-- Root of the TF tree. A massless, shapeless frame on the ground,
+     directly below the chassis centre. -->
+<link name="base_footprint"/>
+
+<!-- Virtual joint: lifts the chassis to its ride height. -->
+<joint name="base_joint" type="fixed">
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+  <origin xyz="0 0 0.1" rpy="0 0 0"/>
+</joint>
+
+<!--Base link-->
+<link name="base_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.6 0.4 0.1"/>
+    </geometry>
+    <material name="blue">
+      <color rgba="0.2 0.4 0.8 1.0"/>
+    </material>
+  </visual>
+</link>
+
+<!--Drive wheels-->
+<!-- The cylinder is defined along its own z-axis, so rpy rolls it 90 deg
+     (pi/2) about x to make it spin about the robot's y-axis. -->
+<link name="left_wheel">
+  <visual>
+    <origin xyz="0 0 0" rpy="1.57 0 0"/>
+    <geometry>
+      <cylinder radius="0.1" length="0.1"/>
+    </geometry>
+    <material name="dark_grey">
+      <color rgba="0.2 0.2 0.2 1.0"/>
+    </material>
+  </visual>
+</link>
+
+<!-- y = 0.4/2 + 0.1/2 = 0.25, flush against the chassis side.
+     x = -0.1 puts the axle behind the centre so the robot rests
+     forward onto the caster. -->
+<joint name="left_wheel_joint" type="continuous">
+  <parent link="base_link"/>
+  <child link="left_wheel"/>
+  <origin xyz="-0.1 0.25 0" rpy="0 0 0"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<link name="right_wheel">
+  <visual>
+    <origin xyz="0 0 0" rpy="1.57 0 0"/>
+    <geometry>
+      <cylinder radius="0.1" length="0.1"/>
+    </geometry>
+    <material name="dark_grey"/>
+  </visual>
+</link>
+
+<!-- Identical link, mirrored joint. Same axis as the left wheel. -->
+<joint name="right_wheel_joint" type="continuous">
+  <parent link="base_link"/>
+  <child link="right_wheel"/>
+  <origin xyz="-0.1 -0.25 0" rpy="0 0 0"/>
+  <axis xyz="0 1 0"/>
+</joint>
+
+<!--Caster wheel-->
+<!-- A sphere assumed to roll in any direction, so the mount is fixed. -->
+<link name="caster_wheel">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <sphere radius="0.05"/>
+    </geometry>
+    <material name="light_grey">
+      <color rgba="0.7 0.7 0.7 1.0"/>
+    </material>
+  </visual>
+</link>
+
+<!-- Centre sits on the chassis underside, so only the lower hemisphere
+     protrudes. x = 0.2 places it at the front. -->
+<joint name="caster_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="caster_wheel"/>
+  <origin xyz="0.2 0 -0.05" rpy="0 0 0"/>
+</joint>
+
+</robot>

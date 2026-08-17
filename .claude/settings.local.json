@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find ~/ros2_ws -maxdepth 3 -not -path \"*/build/*\" -not -path \"*/install/*\" -not -path \"*/log/*\" | head -40)",
+      "Read(//home/thomas/**)"
+    ]
+  }
+}
