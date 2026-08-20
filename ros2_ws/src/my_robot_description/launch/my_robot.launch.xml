@@ -15,7 +15,8 @@
 </node>
 <!--GUI sliders for left_wheel_joint and right_wheel_joint.
     Fixed joints have no DOF, so they do not appear here-->
-<!--node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui"--> task 3 code 
+<!--task 3 code -->
+<!--node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui"--> 
 <!--Task4-->
 <node pkg="my_robot_description" exec="wheel_publisher"/>
 
