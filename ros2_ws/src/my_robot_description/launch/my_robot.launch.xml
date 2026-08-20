@@ -13,11 +13,10 @@
     <param name="robot_description"
         value="$(command 'cat $(var urdf_path)')" type="str"/>
 </node>
-<!--GUI sliders for left_wheel_joint and right_wheel_joint.
-    Fixed joints have no DOF, so they do not appear here-->
-<!--task 3 code -->
+<!--Task3 used the GUI  to move the joint manually-->
 <!--node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui"--> 
-<!--Task4-->
+<!--Task4 replaces it with a custom node that publishes wheel joint states.
+This helps wheels turn on their own-->
 <node pkg="my_robot_description" exec="wheel_publisher"/>
 
 <!--RViz with the saved config: fixed frame base_footprint-->
