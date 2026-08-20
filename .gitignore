@@ -23,6 +23,7 @@ CLAUDE.md
 *.swp
 *~
 .DS_Store
+test.tex
 
 # --- Course material (uncomment to keep the lecturer's PDF out of the repo) ---
 # Assignment 1 ACiT4820.pdf
